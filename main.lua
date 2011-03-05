@@ -31,4 +31,6 @@ if not setModeOk then shutdown() end
 
 --------------------------------------------------------------------------------
 -- game sub-modules
+require 'init'
 require 'input'
+require 'update'
