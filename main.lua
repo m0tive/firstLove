@@ -29,8 +29,6 @@ end
 local setModeOk = love.graphics.setMode(window.width, window.height, true, true, 0)
 if not setModeOk then shutdown() end
 
-love.graphics.setCaption("My First Love")
-
 --------------------------------------------------------------------------------
 -- game sub-modules
 require 'input'
