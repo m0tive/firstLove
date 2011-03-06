@@ -8,6 +8,7 @@
 g_game = { shutdown = nil,
            window = { width = 100, height = 100 },
            dt = 0.000001,
+           state = "",
            assets = {} }
 
 -- create a shutdown function
@@ -39,3 +40,4 @@ if not setModeOk then shutdown() end
 require 'init'
 require 'input'
 require 'update'
+

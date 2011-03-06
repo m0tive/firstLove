@@ -7,17 +7,18 @@ function love.keypressed(key, unicode)
         g_game.shutdown()
         return
     end
-    if gameState == "toPlay" then
+
+    if g_game.state == "toPlay" then
         if key == "down" then
-            gameState = "toQuit"
+            g_game.state = "toQuit"
         elseif key == "return" then
-            gameState = "play"
+            g_game.state = "play"
         end
-    elseif gameState == "toQuit" then
+    elseif g_game.state == "toQuit" then
         if key == "return" then
-            gameState = "quit"
+            g_game.state = "quit"
         elseif key == "up" then
-            gameState = "toPlay"
+            g_game.state = "toPlay"
         end
     end
 end

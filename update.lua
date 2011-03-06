@@ -1,5 +1,9 @@
-local posMenuX = (window.width-256)/2
-local posMenuY = (window.height-256)/2-256/2
+--------------------------------------------------------------------------------
+--
+--------------------------------------------------------------------------------
+
+local posMenuX = (g_game.window.width-256)/2
+local posMenuY = (g_game.window.height-256)/2-256/2
 
 function love.update(dt)
     g_game.dt = dt
@@ -11,17 +15,17 @@ local function drawGame ()
 end
 
 function love.draw()
-    if gameState == "toPlay" then
+    if g_game.state == "toPlay" then
         love.graphics.draw(menuPlayHoverImage,posMenuX,posMenuY)
         love.graphics.draw(menuQuitImage, posMenuX, posMenuY+256)
         love.graphics.setBackgroundColor(255, 255, 255)
-    elseif gameState == "play" then
+    elseif g_game.state == "play" then
         drawGame()
-    elseif gameState == "toQuit" then
+    elseif g_game.state == "toQuit" then
         love.graphics.draw(menuPlayImage,posMenuX,posMenuY)
         love.graphics.draw(menuQuitHoverImage, posMenuX, posMenuY+256)
         love.graphics.setBackgroundColor(255, 255, 255)
-    elseif gameState == "quit" then
+    elseif g_game.state == "quit" then
         shutdown()
     end
 end
