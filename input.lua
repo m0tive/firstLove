@@ -2,6 +2,7 @@
 -- Input functions
 --------------------------------------------------------------------------------
 
+----------------------------------------
 function love.keypressed(key, unicode)
     if key == 'escape' then
         g_game.shutdown()
@@ -22,3 +23,4 @@ function love.keypressed(key, unicode)
         end
     end
 end
+
