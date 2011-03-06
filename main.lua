@@ -7,6 +7,7 @@
 
 g_game = { shutdown = nil,
            window = { width = 100, height = 100 },
+           dt = 0.000001,
            assets = {} }
 
 -- create a shutdown function
