@@ -4,7 +4,7 @@
 
 function love.keypressed(key, unicode)
     if key == 'escape' then
-        shutdown()
+        g_game.shutdown()
         return
     end
     if gameState == "toPlay" then

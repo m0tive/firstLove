@@ -6,8 +6,8 @@ function love.draw()
         love.graphics.draw(menuQuitImage, posMenuX, posMenuY+256)
         love.graphics.setBackgroundColor(255, 255, 255)
     elseif gameState == "play" then
-        love.graphics.draw(birdImage, 100, 100)
         love.graphics.setBackgroundColor(255, 255, 255)
+        love.graphics.draw(g_game.assets.bird, 100, 100)
     elseif gameState == "toQuit" then
         love.graphics.draw(menuPlayImage,posMenuX,posMenuY)
         love.graphics.draw(menuQuitHoverImage, posMenuX, posMenuY+256)
