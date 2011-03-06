@@ -36,6 +36,7 @@ function love.keypressed(key, unicode)
             g_game.menu.state = "quit"
         elseif key == "return" then
             g_game.state = "play"
+            g_game.start()
         end
     end
 

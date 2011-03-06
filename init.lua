@@ -16,6 +16,9 @@ for i = 1, #modes do
     end
 end
 
+g_game.window.center.x = g_game.window.width / 2
+g_game.window.center.y = g_game.window.height / 2
+
 ----------------------------------------
 -- set to fullscreen
 local setModeOk =
