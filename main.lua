@@ -16,6 +16,7 @@ g_game = {
     state = "",
     assets = {},
     shutdown = function () love.event.push('q') end,
+    menu = {},
 }
 
 ----------------------------------------

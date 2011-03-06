@@ -22,7 +22,7 @@ local setModeOk =
     love.graphics.setMode(g_game.window.width, g_game.window.height,
                           g_game.window.fullscreen,
                           true, 0) -- vsync, fsaa buffer count
-if not setModeOk then shutdown() end
+if not setModeOk then g_game.shutdown() end
 
 ----------------------------------------
 function love.load()
@@ -34,9 +34,8 @@ function love.load()
 
     g_game.assets.bird = love.graphics.newImage("images/bird.png")
 
-    menuPlayImage = love.graphics.newImage("images/menuPlay.png")
-    menuPlayHoverImage = love.graphics.newImage("images/menuPlayHover.png")
-    menuQuitImage = love.graphics.newImage("images/menuQuit.png")
-    menuQuitHoverImage = love.graphics.newImage("images/menuQuitHover.png")
+    g_game.assets.menu_play = love.graphics.newImage("images/menuPlay.png")
+    g_game.assets.menu_playHover = love.graphics.newImage("images/menuPlayHover.png")
+    g_game.assets.menu_quit = love.graphics.newImage("images/menuQuit.png")
+    g_game.assets.menu_quitHover = love.graphics.newImage("images/menuQuitHover.png")
 end
-
