@@ -5,22 +5,45 @@
 ----------------------------------------
 function love.keypressed(key, unicode)
     if key == 'escape' then
-        g_game.shutdown()
-        return
+        if g_game.state == "play" then
+            g_game.state = "pop"
+            g_game.menu.state ="yes"
+            return
+        elseif g_game.state == "pop" then
+            g_game.state = "play"
+        end
     end
 
-    if g_game.state == "toPlay" then
+
+    if g_game.menu.state =="yes" then
         if key == "down" then
-            g_game.state = "toQuit"
+            g_game.menu.state = "no"
+        elseif key =="return" then
+            g_game.state ="play"
+        end
+    end
+
+    if g_game.menu.state =="no" then
+        if key == "up" then
+            g_game.menu.state = "yes"
+        elseif key =="return" then
+            g_game.state ="quit"
+        end
+    end
+
+    if g_game.menu.state == "play" then
+        if key == "down" then
+            g_game.menu.state = "quit"
         elseif key == "return" then
             g_game.state = "play"
         end
-    elseif g_game.state == "toQuit" then
-        if key == "return" then
+    end
+
+    if g_game.menu.state == "quit" then
+        if key == "up" then
+            g_game.menu.state = "play"
+        elseif key == "return" then
             g_game.state = "quit"
-        elseif key == "up" then
-            g_game.state = "toPlay"
         end
     end
 end
-

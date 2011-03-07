@@ -28,21 +28,35 @@ local function drawGame ()
 end
 
 ----------------------------------------
-local function drawImage(_image, _offset)
-    love.graphics.draw( _image, centreX - _image:getWidth()/2, centreY - _image:getHeight() / 2 + _offset)
+--offsetx and offsety
+local function drawImage(_image, _offsetX, _offsetY )
+    love.graphics.draw( _image, centreX - _image:getWidth()/2 + _offsetX, centreY - _image:getHeight() / 2 + _offsetY)
 end
+
 ----------------------------------------
 function love.draw()
-    if g_game.state == "toPlay" then
-        drawImage(g_game.assets.menu_playHover, -g_game.assets.menu_playHover:getHeight()/2)
-        drawImage(g_game.assets.menu_quit, g_game.assets.menu_quit:getHeight()/2)
+    local assets = g_game.assets
+    if g_game.state == "menu" then
         love.graphics.setBackgroundColor(255, 255, 255)
+        if g_game.menu.state == "play" then
+            drawImage(assets.menu_playHover, 0, -assets.menu_playHover:getHeight()/2)
+            drawImage(assets.menu_quit, 0, assets.menu_quit:getHeight()/2)
+        elseif g_game.menu.state == "quit" then
+            drawImage(assets.menu_play, 0, -assets.menu_playHover:getHeight()/2)
+            drawImage(assets.menu_quitHover, 0, assets.menu_quit:getHeight()/2)
+        end
+    elseif g_game.state =="pop" then
+        drawImage(assets.menu_pop, 0, 0)
+        drawGame()
+        if g_game.menu.state == "yes" then
+            drawImage(assets.menu_yesHover, 0, -assets.menu_yes:getHeight()/5)
+            drawImage(assets.menu_no, 0, assets.menu_no:getHeight()/4)
+        elseif g_game.menu.state == "no" then
+            drawImage(assets.menu_yes, 0, -assets.menu_no:getHeight()/5)
+            drawImage(assets.menu_noHover, 0, assets.menu_no:getHeight()/4)
+        end
     elseif g_game.state == "play" then
         drawGame()
-    elseif g_game.state == "toQuit" then
-        drawImage(g_game.assets.menu_play, -g_game.assets.menu_playHover:getHeight()/2)
-        drawImage(g_game.assets.menu_quitHover, g_game.assets.menu_quit:getHeight()/2)
-        love.graphics.setBackgroundColor(255, 255, 255)
     elseif g_game.state == "quit" then
         g_game.shutdown()
     end

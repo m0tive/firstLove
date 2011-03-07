@@ -26,7 +26,8 @@ if not setModeOk then g_game.shutdown() end
 
 ----------------------------------------
 function love.load()
-    g_game.state = "toPlay"
+    g_game.state = "menu"
+    g_game.menu.state = "play"
 
     -- REMEMBER. Love is delicate. All images must be power-of-2
     -- ie. 1 2 4 8 16 32 64 128 256 512 1024 2048 4096 8192 16384
@@ -38,4 +39,13 @@ function love.load()
     g_game.assets.menu_playHover = love.graphics.newImage("images/menuPlayHover.png")
     g_game.assets.menu_quit = love.graphics.newImage("images/menuQuit.png")
     g_game.assets.menu_quitHover = love.graphics.newImage("images/menuQuitHover.png")
+
+    g_game.assets.menu_pop = love.graphics.newImage("images/menuPop.png")
+
+    g_game.assets.menu_yes = love.graphics.newImage("images/menuYes.png")
+    g_game.assets.menu_yesHover = love.graphics.newImage("images/menuYesHover.png")
+    g_game.assets.menu_no = love.graphics.newImage("images/menuNo.png")
+    g_game.assets.menu_noHover = love.graphics.newImage("images/menuNoHover.png")
+
+    love.graphics.setColorMode("replace")
 end
