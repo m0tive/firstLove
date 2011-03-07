@@ -59,9 +59,10 @@ end
 ----------------------------------------
 local function drawDebug()
     love.graphics.setColor(0, 0, 0, 255/2)
-    love.graphics.rectangle("fill", 0, 0, 50, 30)
+    love.graphics.rectangle("fill", 0, 0, g_game.window.width, 30)
 
     love.graphics.print(g_game.fps, 10, 10)
+    love.graphics.print("\"" .. g_game.lastKey .. "\"", 50, 10)
 end
 
 ----------------------------------------
