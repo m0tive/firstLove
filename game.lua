@@ -7,11 +7,12 @@ local function preStart()
     -- Clear the bird list
     g_game.birds = {}
 
-    local center = g_game.window.center
-    local birdCount = math.random(40)
+    local limitX, limitY =
+        g_game.window.width - 16, g_game.window.height - (25 + 16)
+    local birdCount = 40 -- math.random(40)
     for i = 1, birdCount do
         g_game.birds[i] =
-            g_game.newBird(center.x, center.y)
+            g_game.newBird(math.random(limitX), math.random(limitY))
     end
 end
 

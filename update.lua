@@ -24,7 +24,14 @@ local function drawGame ()
     love.graphics.rectangle("fill", floor.x, floor.y, floor.width, floor.height )
 
     -- draw all the birds
-    love.graphics.draw(g_game.assets.bird, 100, 100)
+    local birdCount = #g_game.birds
+    local birdImage = g_game.assets.bird
+    for i = 1, birdCount do
+        local bird = g_game.birds[i]
+        if bird then
+            love.graphics.draw(birdImage, bird.pos.x, bird.pos.y)
+        end
+    end
 end
 
 ----------------------------------------
