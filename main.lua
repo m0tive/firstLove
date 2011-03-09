@@ -20,7 +20,6 @@ g_game = {
         center = { x = 0, y = 0 },
         fullscreen = true },
     dt = 0.000001,
-    fps = 0, lastKey = "",
     state = "",
     assets = {},
 
@@ -32,6 +31,14 @@ g_game = {
     shutdown = function () love.event.push('q') end,
     menu = {},
 }
+
+----------------------------------------
+g_debug = {
+    update = function (dt) end,
+    draw = function () end
+}
+
+--require 'game_debug'
 
 ----------------------------------------
 -- game sub-modules

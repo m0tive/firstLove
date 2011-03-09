@@ -9,31 +9,11 @@ local floor = { r = 51, g = 27, b = 19,
                 x = 0, y = g_game.window.height - 25,
                 width = g_game.window.width, height = 25 }
 
-local dt_b_size, dt_b_index = 10, 0
-local dt_buffer = {}
-for i = 1, dt_b_size do dt_buffer[i] = 0 end
-
-----------------------------------------
-local function calculateFps(dt)
-    -- calculate average time
-    dt_buffer[dt_b_index+1] = dt
-
-    local average = 0
-    for i = 1, dt_b_size do
-        average = average + dt_buffer[i]
-    end
-
-    if dt_b_index == 0 then
-        g_game.fps = math.floor(0.6/(average / dt_b_size))
-    end
-
-    dt_b_index = (dt_b_index + 1)%dt_b_size
-end
 
 ----------------------------------------
 function love.update(dt)
     g_game.dt = dt
-    calculateFps(dt)
+    g_debug.update(dt)
 end
 
 ----------------------------------------
@@ -54,15 +34,6 @@ local function drawGame ()
             love.graphics.draw(birdImage, bird.pos.x, bird.pos.y)
         end
     end
-end
-
-----------------------------------------
-local function drawDebug()
-    love.graphics.setColor(0, 0, 0, 255/2)
-    love.graphics.rectangle("fill", 0, 0, g_game.window.width, 30)
-
-    love.graphics.print(g_game.fps, 10, 10)
-    love.graphics.print("\"" .. g_game.lastKey .. "\"", 50, 10)
 end
 
 ----------------------------------------
@@ -109,5 +80,5 @@ function love.draw()
         g_game.shutdown()
     end
 
-    drawDebug()
+    g_debug.draw()
 end

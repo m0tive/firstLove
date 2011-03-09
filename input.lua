@@ -14,12 +14,14 @@ end
 function love.keypressed(key, unicode)
     local shiftDown, ctrlDown, altDown = findModifiers()
 
+    --_DEBUG
     local keyString = key
     if altDown == true then keyString = "alt + " .. keyString end
     if ctrlDown == true then keyString = "ctrl + " .. keyString end
     if shiftDown == true then keyString = "shift + " .. keyString end
-    g_game.lastKey = keyString
-    
+    g_debug.lastKey = keyString
+    --]]
+
     if key == 'escape' then
         if g_game.state == "play" then
             g_game.state = "popMenu"
