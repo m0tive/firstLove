@@ -29,7 +29,7 @@ if not setModeOk then g_game.shutdown() end
 
 ----------------------------------------
 function love.load()
-    g_game.state = "menu"
+    g_game.state = "startMenu"
     g_game.menu.state = "play"
 
     -- REMEMBER. Love is delicate. All images must be power-of-2

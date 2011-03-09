@@ -19,48 +19,57 @@ function love.keypressed(key, unicode)
     if ctrlDown == true then keyString = "ctrl + " .. keyString end
     if shiftDown == true then keyString = "shift + " .. keyString end
     g_game.lastKey = keyString
-
+    
     if key == 'escape' then
         if g_game.state == "play" then
-            g_game.state = "pop"
+            g_game.state = "popMenu"
             g_game.menu.state ="yes"
             return
-        elseif g_game.state == "pop" then
+        elseif g_game.state == "popMenu" then
             g_game.state = "play"
         end
     end
 
-
-    if g_game.menu.state =="yes" then
-        if key == "down" then
-            g_game.menu.state = "no"
-        elseif key =="return" then
-            g_game.state ="play"
+    if key == "return" then
+        if g_game.state == "startMenu" then
+            if g_game.menu.state == "play" then
+                g_game.state = "play"
+                g_game.start()
+            elseif g_game.menu.state == "quit" then
+                g_game.state = "quit"
+            end
+        elseif g_game.state == "popMenu" then
+            if g_game.menu.state == "yes" then
+                g_game.menu.state = "yes"
+                g_game.state = "play"
+            elseif g_game.menu.state == "no" then
+                g_game.menu.state = ""
+                g_game.state = "quit"
+            end
         end
     end
 
-    if g_game.menu.state =="no" then
-        if key == "up" then
-            g_game.menu.state = "yes"
-        elseif key =="return" then
-            g_game.state ="quit"
+    if key == "up" then
+        if g_game.state == "startMenu" then
+            if g_game.menu.state == "quit" then
+                g_game.menu.state = "play"
+            end
+        elseif g_game.state == "popMenu" then
+            if g_game.menu.state == "no" then
+                g_game.menu.state = "yes"
+            end
         end
     end
 
-    if g_game.menu.state == "play" then
-        if key == "down" then
-            g_game.menu.state = "quit"
-        elseif key == "return" then
-            g_game.state = "play"
-            g_game.start()
-        end
-    end
-
-    if g_game.menu.state == "quit" then
-        if key == "up" then
-            g_game.menu.state = "play"
-        elseif key == "return" then
-            g_game.state = "quit"
+    if key == "down" then
+         if g_game.state == "startMenu" then
+            if g_game.menu.state == "play" then
+                g_game.menu.state = "quit"
+            end
+        elseif g_game.state == "popMenu" then
+            if g_game.menu.state == "yes" then
+                g_game.menu.state = "no"
+            end
         end
     end
 end

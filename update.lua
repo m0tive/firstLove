@@ -70,11 +70,11 @@ end
 local function drawImage(_image, _offsetX, _offsetY )
     love.graphics.draw( _image, centreX - _image:getWidth()/2 + _offsetX, centreY - _image:getHeight() / 2 + _offsetY)
 end
-
 ----------------------------------------
-function love.draw()
-    local assets = g_game.assets
-    if g_game.state == "menu" then
+local assets = g_game.assets
+----------------------------------------
+--draw start menu
+local function drawStartMenu()
         love.graphics.setBackgroundColor(255, 255, 255)
         if g_game.menu.state == "play" then
             drawImage(assets.menu_playHover, 0, -assets.menu_playHover:getHeight()/2)
@@ -83,9 +83,11 @@ function love.draw()
             drawImage(assets.menu_play, 0, -assets.menu_playHover:getHeight()/2)
             drawImage(assets.menu_quitHover, 0, assets.menu_quit:getHeight()/2)
         end
-    elseif g_game.state =="pop" then
+end
+----------------------------------------
+--draw pop up menu
+local function drawPopMenu()
         drawImage(assets.menu_pop, 0, 0)
-        drawGame()
         if g_game.menu.state == "yes" then
             drawImage(assets.menu_yesHover, 0, -assets.menu_yes:getHeight()/5)
             drawImage(assets.menu_no, 0, assets.menu_no:getHeight()/4)
@@ -93,6 +95,14 @@ function love.draw()
             drawImage(assets.menu_yes, 0, -assets.menu_no:getHeight()/5)
             drawImage(assets.menu_noHover, 0, assets.menu_no:getHeight()/4)
         end
+end
+----------------------------------------
+function love.draw()
+    if g_game.state == "startMenu" then
+        drawStartMenu()
+    elseif g_game.state =="popMenu" then
+        drawGame()
+        drawPopMenu()
     elseif g_game.state == "play" then
         drawGame()
     elseif g_game.state == "quit" then
