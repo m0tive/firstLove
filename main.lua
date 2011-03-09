@@ -34,11 +34,12 @@ g_game = {
 
 ----------------------------------------
 g_debug = {
+    track = function (id, val) end,
     update = function (dt) end,
     draw = function () end
 }
 
---require 'game_debug'
+require 'game_debug'
 
 ----------------------------------------
 -- game sub-modules
