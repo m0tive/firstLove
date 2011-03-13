@@ -21,7 +21,13 @@ g_game = {
         fullscreen = true },
     dt = 0.000001,
     state = "",
+    substate = "",
+
     assets = {},
+
+    world = {
+        x = 0, y = 0,
+        width = 100, height = 100 },
 
     birds = {},
     newBird = nil, -- function defined in bird.lua
