@@ -22,6 +22,7 @@ g_game = {
     dt = 0.000001,
     state = "",
     substate = "",
+    selection = "",
 
     assets = {},
 

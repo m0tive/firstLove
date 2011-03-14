@@ -31,8 +31,8 @@ function love.load()
     g_game.world.width = g_game.window.width
     g_game.world.height = g_game.window.height - 25
 
-    g_game.state = "startMenu"
-    g_game.menu.state = "play"
+    g_game.state = "menu"
+    g_game.selection = "play"
 
     local love_newImage = love.graphics.newImage
     local function loadAsset( name, file )

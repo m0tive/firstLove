@@ -9,7 +9,54 @@ local function findModifiers()
         love.keyboard.isDown("lctrl") or love.keyboard.isDown("rctrl"),
         love.keyboard.isDown("lalt") or love.keyboard.isDown("ralt")
 end
-
+----------------------------------------
+local function menuKeyPressed(key, unicode)
+    if key == "up" then 
+        if g_game.selection == "quit" then
+            g_game.selection = "play"
+        end
+    elseif key == "down" then 
+        if g_game.selection == "play" then
+            g_game.selection = "quit"
+        end
+    elseif key == "return" then 
+        if g_game.selection == "play" then
+            g_game.state = "play"
+            g_game.start()
+        elseif g_game.selection == "quit" then
+            g_game.state = "quit"
+        end
+    end
+end
+----------------------------------------
+local function playKeyPressed(key, unicode)
+    if key == "up" then
+    elseif key == "down" then
+    elseif key == "return" then
+    elseif key == "escape" then 
+        g_game.state = "pause" 
+        g_game.selection = "yes"
+    end
+end
+----------------------------------------
+local function pauseKeyPressed(key, unicode)
+    if key == "up" then 
+        if g_game.selection == "no" then
+            g_game.selection = "yes"
+        end
+    elseif key == "down" then 
+        if g_game.selection == "yes" then
+            g_game.selection = "no"
+        end
+    elseif key == "return" then 
+        if g_game.selection == "yes" then
+            g_game.state = "play"
+        elseif g_game.selection == "no" then
+            g_game.state = "quit"
+        end
+    elseif key == "escape" then g_game.state = "play"
+    end
+end
 ----------------------------------------
 function love.keypressed(key, unicode)
     local shiftDown, ctrlDown, altDown = findModifiers()
@@ -22,6 +69,15 @@ function love.keypressed(key, unicode)
     g_debug.lastKey = keyString
     --]]
 
+    if g_game.state == "menu" then
+        menuKeyPressed(key, unicode)
+    elseif g_game.state == "play" then
+        playKeyPressed(key, unicode)
+    elseif g_game.state == "pause" then
+        pauseKeyPressed(key, unicode)
+    end
+
+--[[
     if key == 'escape' then
         if g_game.state == "play" then
             g_game.state = "popMenu"
@@ -74,4 +130,5 @@ function love.keypressed(key, unicode)
             end
         end
     end
+--]]
 end
