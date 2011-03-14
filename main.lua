@@ -46,6 +46,7 @@ g_debug = {
 }
 
 require 'game_debug'
+require 'game_run'
 
 ----------------------------------------
 -- game sub-modules

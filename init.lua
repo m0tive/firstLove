@@ -43,19 +43,22 @@ function love.load()
     -- ie. 1 2 4 8 16 32 64 128 256 512 1024 2048 4096 8192 16384
     -- read more: http://love2d.org/wiki/PO2_Syndrome
 
-    g_game.assets.bird = love.graphics.newImage("images/bird.png")
+    local assets = g_game.assets
+    local newImage = love.graphics.newImage
 
-    g_game.assets.menu_play = love.graphics.newImage("images/menuPlay.png")
-    g_game.assets.menu_playHover = love.graphics.newImage("images/menuPlayHover.png")
-    g_game.assets.menu_quit = love.graphics.newImage("images/menuQuit.png")
-    g_game.assets.menu_quitHover = love.graphics.newImage("images/menuQuitHover.png")
+    assets.bird = newImage("images/bird.png")
 
-    g_game.assets.menu_pop = love.graphics.newImage("images/menuPop.png")
+    assets.menu_play = newImage("images/menuPlay.png")
+    assets.menu_playHover = newImage("images/menuPlayHover.png")
+    assets.menu_quit = newImage("images/menuQuit.png")
+    assets.menu_quitHover = newImage("images/menuQuitHover.png")
 
-    g_game.assets.menu_yes = love.graphics.newImage("images/menuYes.png")
-    g_game.assets.menu_yesHover = love.graphics.newImage("images/menuYesHover.png")
-    g_game.assets.menu_no = love.graphics.newImage("images/menuNo.png")
-    g_game.assets.menu_noHover = love.graphics.newImage("images/menuNoHover.png")
+    assets.menu_pop = newImage("images/menuPop.png")
+
+    assets.menu_yes = newImage("images/menuYes.png")
+    assets.menu_yesHover = newImage("images/menuYesHover.png")
+    assets.menu_no = newImage("images/menuNo.png")
+    assets.menu_noHover = newImage("images/menuNoHover.png")
 
     love.graphics.setColorMode("replace")
 end
