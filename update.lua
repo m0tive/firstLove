@@ -9,10 +9,14 @@ local love_draw, love_setBackgroundColor, love_setColor, love_rectangle =
     love_graphics.setColor,
     love_graphics.rectangle
 
+local g_game_update, g_debug_update = g_game.update, g_debug.update
+
 ----------------------------------------
 function love.update(dt)
     g_game.dt = dt
-    g_debug.update(dt)
+
+    g_debug_update(dt)
+    --g_game_update(dt)
 end
 
 ----------------------------------------
@@ -33,57 +37,85 @@ local function drawGame ()
     for i = 1, birdCount do
         local bird = local_birds[i]
         if bird then
-            love_draw(birdImage, bird.pos.x, bird.pos.y)
+            local pos = bird["pos"]
+            love_draw(birdImage, pos["x"], pos["y"])
         end
     end
 end
 
 ----------------------------------------
 --offsetx and offsety
-local function drawImageCentred(_image, _offsetX, _offsetY )
-    local centreX = g_game.window.center["x"]
-    local centreY = g_game.window.center["y"]
+local function drawImageCentred(image, offsetX, offsetY )
+    local centre = g_game["window"]["center"]
 
-    love_draw( _image, centreX - _image:getWidth()/2 + _offsetX, centreY - _image:getHeight() / 2 + _offsetY)
+    local posX, posY =
+        centre["x"] + offsetX,
+        centre["y"] + offsetY
+
+    love_draw( image,
+        posX - image:getWidth()/2,
+        posY - image:getHeight()/2)
 end
+
 ----------------------------------------
 local assets = g_game.assets
+
 ----------------------------------------
 --draw start menu
 local function drawMenu()
-        love_setBackgroundColor(255, 255, 255)
-        if g_game.selection == "play" then
-            drawImageCentred(assets.menu_playHover, 0, -assets.menu_playHover:getHeight()/2)
-            drawImageCentred(assets.menu_quit, 0, assets.menu_quit:getHeight()/2)
-        elseif g_game.selection == "quit" then
-            drawImageCentred(assets.menu_play, 0, -assets.menu_playHover:getHeight()/2)
-            drawImageCentred(assets.menu_quitHover, 0, assets.menu_quit:getHeight()/2)
-        end
+    local selection = g_game["selection"]
+
+    -- initialise the images so they are in this scope
+    local play, quit
+    if selection == "play" then
+        play, quit = assets["menu_playHover"],
+                     assets["menu_quit"]
+    elseif selection == "quit" then
+        play, quit = assets["menu_play"],
+                     assets["menu_quitHover"]
+    else
+        error( "bad selection" )
+    end
+
+    love_setBackgroundColor(255, 255, 255)
+    drawImageCentred(play, 0, -play:getHeight()/2)
+    drawImageCentred(quit, 0,  quit:getHeight()/2)
 end
 
 ----------------------------------------
 --draw pop up menu
 local function drawPause()
-        drawImageCentred(assets.menu_pop, 0, 0)
-        if g_game.selection == "yes" then
-            drawImageCentred(assets.menu_yesHover, 0, -assets.menu_yes:getHeight()/5)
-            drawImageCentred(assets.menu_no, 0, assets.menu_no:getHeight()/4)
-        elseif g_game.selection == "no" then
-            drawImageCentred(assets.menu_yes, 0, -assets.menu_no:getHeight()/5)
-            drawImageCentred(assets.menu_noHover, 0, assets.menu_no:getHeight()/4)
-        end
+    local selection = g_game["selection"]
+
+    -- initialise the images so they are in this scope
+    local yesbut, nobut
+    if selection == "yes" then
+        yesbut, nobut = assets["menu_yesHover"],
+                        assets["menu_no"]
+    elseif selection == "no" then
+        yesbut, nobut = assets["menu_yes"],
+                        assets["menu_noHover"]
+    else
+        error( "bad selection" )
+    end
+
+    drawImageCentred(assets.menu_pop, 0, 0)
+    drawImageCentred(yesbut, 0, -yesbut:getHeight()/5)
+    drawImageCentred(nobut,  0,  nobut:getHeight()/4)
 end
 
 ----------------------------------------
 function love.draw()
-    if g_game.state == "menu" then
+    local state = g_game["state"]
+
+    if state == "menu" then
         drawMenu()
-    elseif g_game.state =="pause" then
+    elseif state =="pause" then
         drawGame()
         drawPause()
-    elseif g_game.state == "play" then
+    elseif state == "play" then
         drawGame()
-    elseif g_game.state == "quit" then
+    elseif state == "quit" then
         g_game.shutdown()
     end
 
