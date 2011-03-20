@@ -17,8 +17,8 @@ function love.load()
         end
     end
 
-    g_game.window.center.x = g_game.window.width / 2
-    g_game.window.center.y = g_game.window.height / 2
+    g_game.window.centre.x = g_game.window.width / 2
+    g_game.window.centre.y = g_game.window.height / 2
 
     ----------------------------------------
     -- set to fullscreen

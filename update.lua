@@ -9,14 +9,21 @@ local love_draw, love_setBackgroundColor, love_setColor, love_rectangle =
     love_graphics.setColor,
     love_graphics.rectangle
 
-local g_game_update, g_debug_update = g_game.update, g_debug.update
+local g_debug_update = g_debug.update
+local g_game_state = g_game.state
+
+local updateState = {
+    play = g_game.update,
+    quit = g_game.shutdown,
+}
 
 ----------------------------------------
 function love.update(dt)
     g_game.dt = dt
-
     g_debug_update(dt)
-    --g_game_update(dt)
+
+    local doUpdate = updateState[g_game["state"]]
+    if doUpdate then doUpdate(dt) end
 end
 
 ----------------------------------------
@@ -46,7 +53,7 @@ end
 ----------------------------------------
 --offsetx and offsety
 local function drawImageCentred(image, offsetX, offsetY )
-    local centre = g_game["window"]["center"]
+    local centre = g_game["window"]["centre"]
 
     local posX, posY =
         centre["x"] + offsetX,
@@ -104,20 +111,17 @@ local function drawPause()
     drawImageCentred(nobut,  0,  nobut:getHeight()/4)
 end
 
+local drawState = {
+    menu = drawMenu,
+    pause = function () drawGame() drawPause() end,
+    play = drawGame,
+    -- quit calling shutdown is now in update above.
+}
+
 ----------------------------------------
 function love.draw()
-    local state = g_game["state"]
-
-    if state == "menu" then
-        drawMenu()
-    elseif state =="pause" then
-        drawGame()
-        drawPause()
-    elseif state == "play" then
-        drawGame()
-    elseif state == "quit" then
-        g_game.shutdown()
-    end
+    local doDraw = drawState[g_game["state"]]
+    if doDraw then doDraw() end
 
     g_debug.draw()
 end

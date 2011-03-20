@@ -17,7 +17,7 @@ math.random() -- pop the first, bad random number
 g_game = {
     window = {
         width = 100, height = 100,
-        center = { x = 0, y = 0 },
+        centre = { x = 0, y = 0 },
         fullscreen = true },
     dt = 0.000001,
     state = "",
@@ -34,6 +34,7 @@ g_game = {
     newBird = nil, -- function defined in bird.lua
 
     start = nil, -- function defined in game.lua
+    update = nil,
 
     shutdown = function () love.event.push('q') end,
     menu = {},
@@ -51,9 +52,10 @@ require 'game_run'
 
 ----------------------------------------
 -- game sub-modules
+require 'bird'
+require 'game'
+
 require 'init'
 require 'input'
 require 'update'
 
-require 'bird'
-require 'game'

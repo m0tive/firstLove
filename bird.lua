@@ -7,5 +7,6 @@ function g_game.newBird(x, y)
     return {
         state = "awake",
         pos = { x = x, y = y },
+        vel = { x = 0, y = 0 },
     }
 end
