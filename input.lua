@@ -22,22 +22,13 @@ local function menuKeyPressed(key, unicode)
     elseif key == "return" then 
         if g_game.selection == "play" then
             g_game.state = "play"
-            g_game.start()
+            g_game.play.start()
         elseif g_game.selection == "quit" then
             g_game.state = "quit"
         end
     end
 end
-----------------------------------------
-local function playKeyPressed(key, unicode)
-    if key == "up" then
-    elseif key == "down" then
-    elseif key == "return" then
-    elseif key == "escape" then 
-        g_game.state = "pause" 
-        g_game.selection = "yes"
-    end
-end
+
 ----------------------------------------
 local function pauseKeyPressed(key, unicode)
     if key == "up" then 
@@ -57,6 +48,7 @@ local function pauseKeyPressed(key, unicode)
     elseif key == "escape" then g_game.state = "play"
     end
 end
+
 ----------------------------------------
 function love.keypressed(key, unicode)
     local shiftDown, ctrlDown, altDown = findModifiers()
@@ -72,7 +64,7 @@ function love.keypressed(key, unicode)
     if g_game.state == "menu" then
         menuKeyPressed(key, unicode)
     elseif g_game.state == "play" then
-        playKeyPressed(key, unicode)
+        g_game.play.keyPressed(key,unicode)
     elseif g_game.state == "pause" then
         pauseKeyPressed(key, unicode)
     end

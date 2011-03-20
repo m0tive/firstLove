@@ -30,11 +30,11 @@ g_game = {
         x = 0, y = 0,
         width = 100, height = 100 },
 
-    birds = {},
-    newBird = nil, -- function defined in bird.lua
-
-    start = nil, -- function defined in game.lua
-    update = nil,
+    play = { -- functions defined in game.lua
+        start = nil,
+        update = nil,
+        draw = nil,
+        keyPressed = nil, },
 
     shutdown = function () love.event.push('q') end,
     menu = {},
@@ -52,7 +52,6 @@ require 'game_run'
 
 ----------------------------------------
 -- game sub-modules
-require 'bird'
 require 'game'
 
 require 'init'
