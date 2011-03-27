@@ -1,5 +1,5 @@
 --------------------------------------------------------------------------------
---
+--Draw function
 --------------------------------------------------------------------------------
 local love_graphics = love.graphics
 local love_draw, love_setBackgroundColor, love_setColor, love_rectangle =

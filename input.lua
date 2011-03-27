@@ -1,7 +1,6 @@
 --------------------------------------------------------------------------------
 -- Input functions
 --------------------------------------------------------------------------------
-
 ----------------------------------------
 local function findModifiers()
     return
@@ -43,7 +42,8 @@ local function pauseKeyPressed(key, unicode)
         if g_game.selection == "yes" then
             g_game.state = "play"
         elseif g_game.selection == "no" then
-            g_game.state = "quit"
+            g_game.state = "menu"
+            g_game.selection = "play"
         end
     elseif key == "escape" then g_game.state = "play"
     end
