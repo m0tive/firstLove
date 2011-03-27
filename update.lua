@@ -11,6 +11,8 @@ local love_draw, love_setBackgroundColor, love_setColor, love_rectangle =
 
 local g_debug_update = g_debug.update
 local g_game_state = g_game.state
+local g_game_assets = g_game.assets
+local g_game_play_draw = g_game.play.draw
 
 local updateState = {
     play = g_game.play.update,
@@ -41,9 +43,6 @@ local function drawImageCentred(image, offsetX, offsetY )
 end
 
 ----------------------------------------
-local assets = g_game.assets
-
-----------------------------------------
 --draw start menu
 local function drawMenu()
     local selection = g_game["selection"]
@@ -51,11 +50,11 @@ local function drawMenu()
     -- initialise the images so they are in this scope
     local play, quit
     if selection == "play" then
-        play, quit = assets["menu_playHover"],
-                     assets["menu_quit"]
+        play = g_game_assets["menu_playHover"]
+        quit = g_game_assets["menu_quit"]
     elseif selection == "quit" then
-        play, quit = assets["menu_play"],
-                     assets["menu_quitHover"]
+        play = g_game_assets["menu_play"]
+        quit = g_game_assets["menu_quitHover"]
     else
         error( "bad selection" )
     end
@@ -73,21 +72,20 @@ local function drawPause()
     -- initialise the images so they are in this scope
     local yesbut, nobut
     if selection == "yes" then
-        yesbut, nobut = assets["menu_yesHover"],
-                        assets["menu_no"]
+        yesbut = g_game_assets["menu_yesHover"]
+        nobut  = g_game_assets["menu_no"]
     elseif selection == "no" then
-        yesbut, nobut = assets["menu_yes"],
-                        assets["menu_noHover"]
+        yesbut = g_game_assets["menu_yes"]
+        nobut  = g_game_assets["menu_noHover"]
     else
         error( "bad selection" )
     end
 
-    drawImageCentred(assets.menu_pop, 0, 0)
+    drawImageCentred(g_game_assets.menu_pop, 0, 0)
     drawImageCentred(yesbut, 0, -yesbut:getHeight()/5)
     drawImageCentred(nobut,  0,  nobut:getHeight()/4)
 end
 
-local g_game_play_draw = g_game.play.draw
 
 local drawState = {
     menu = drawMenu,
