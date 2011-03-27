@@ -56,5 +56,6 @@ require 'game'
 
 require 'init'
 require 'input'
+require 'draw'
 require 'update'
 
